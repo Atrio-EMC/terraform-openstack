@@ -99,3 +99,13 @@ El script realiza las siguientes tareas:
 * Actualiza el sistema
 * Levanta la segunda interfaz
 * Configura el /etc/hosts
+
+## Ejecución de la receta de ansible
+
+Clonamos nuestro repositorio:
+
+	$ git clone -b ocata git@github.com:iesgn/openstack-ubuntu-ansible.git
+
+Y lo ejecutamos:
+
+	$ ansible-playbook site.yml --sudo
