@@ -32,6 +32,18 @@ Si queremos eliminar la infraestrucutara creada:
 
 ## Configuración de `cliente` como router
 
+Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
+
+1) Voy a crear un entorno virtual para instalar los clientes de openstack:
+
+	$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
+
+	$ export LC_ALL=C
+	$ virtualenv os
+	(os)$ pip install requests python-novaclient python-neutronclient
+
+
+
 Accedemos a `cliente` y actualizamos el sistema:
 
 	$ sudo apt-get update
@@ -46,6 +58,7 @@ Nota: Hay que levantar la segunda interfaz, no se hace automáticamente al inici
 	iface ens4 inet dhcp
 
 	$ sudo ifup ens4
+
 
 
 
