@@ -4,8 +4,8 @@ Despliegue automático de Openstack usando terraform. La infraestructura que cre
 
 ![schema](https://github.com/iesgn/terraform-openstack/raw/master/img/tos.png)
 
-* La infraestrucutra de Openstack consta de un controlador y un nodo de computo que se van a crear en dos redes internas (`red-ext` y `red-int`).
-* Desde la máquina `cliente` vamos a controlar nuestra instalación de opnstack: hay que configurarla como router, para que las máquinas de openstack tengan conexión a internet, desde ella vamos a ejecutar las recetas ansible de instalación y vamos a cceder a las instancias creadas.
+* La infraestructura de Openstack consta de un controlador y un nodo de computo que se van a crear en dos redes internas (`red-ext` y `red-int`).
+* Desde la máquina `cliente` vamos a controlar nuestra instalación de opnstack: hay que configurarla como router, para que las máquinas de openstack tengan conexión a internet, desde ella vamos a ejecutar las recetas ansible de instalación y vamos acceder a las instancias creadas.
 
 ## Creación de la infraestrucutra con terraform
 
@@ -61,7 +61,7 @@ Este script quita los grupos de seguridad de `cliente` y desactiva la extensión
 
 ### Configuramos de forma automática el `cliente`
 
-Necesitamos intalar [fabric](http://www.fabfile.org/):
+Necesitamos instalar [fabric](http://www.fabfile.org/):
 
 	# apt-get install fabric
 
