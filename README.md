@@ -34,9 +34,7 @@ Si queremos eliminar la infraestrucutara creada:
 
 	$ terraform destroy
 
-## Configuración de `cliente` como router
-
-
+## Configuración del `cliente` 
 
 Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
 
@@ -85,3 +83,17 @@ El script realiza las siguientes tareas:
 * Configura el enrutamiento 
 * Instala los paquetes necesarios: git, ansible, aptitude
 * Copia la clave privada al cliente para poder acceder a los nodos
+
+## Configuración de los nodos
+
+Desde el `cliente`  vamos a configurar de forma automática los nodos con fabric:
+
+Instalamos fabric y descargamos el script fabric:
+
+	$ wget https://github.com/iesgn/terraform-openstack/raw/master/conf/nodos/fabfile.py > fabfile.py
+	$ fab -H 192.168.1.101,192.168.1.102 main
+
+El script realiza las siguientes tareas:
+
+* Actualiza el sistema
+* Levanta la segunda interfaz

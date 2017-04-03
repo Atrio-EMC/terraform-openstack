@@ -9,26 +9,9 @@ def main():
 	sudo("apt-get -y upgrade")
 
 
-#	# Compruebo si ens4 está configurada
-#	try:
-#		sudo("cat '/etc/network/interfaces.d/50-cloud-init.cfg' |grep ens4")
-#	except:
-#		sudo('echo "\nauto ens4\niface ens4 inet dhcp">>/etc/network/interfaces.d/50-cloud-init.cfg')
-#		sudo("ifup ens4")
-#	
-#	# Configuro el router
-#	try:
-#		sudo("cat '/etc/network/interfaces.d/50-cloud-init.cfg' |grep iptables")
-#	except:
-#		sudo('echo "\nup iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o ens3 -j MASQUERADE">>/etc/network/interfaces.d/50-cloud-init.cfg')
-#		sudo("systemctl restart networking")
-#	sudo('sed -i -e s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g /etc/sysctl.conf')
-#	sudo('sysctl -p')#
-#
-#
-
-#	# Instalo los paquetes necesarios
-#	sudo("apt-get -y install ansible git aptitude")
-#	# Copiamos nuestra clave privada para acceder a las demás máquinas
-#	if not exists('~/.ssh/id_rsa'):
-#		put("~/.ssh/id_rsa", "~/.ssh/id_rsa",mode="400")
+	# Compruebo si ens4 está configurada
+	try:
+		sudo("cat '/etc/network/interfaces.d/50-cloud-init.cfg' |grep ens4")
+	except:
+		sudo('echo "\nauto ens4\niface ens4 inet dhcp">>/etc/network/interfaces.d/50-cloud-init.cfg')
+		sudo("ifup ens4")
