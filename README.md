@@ -49,10 +49,12 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 		(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
 
 2) Ejecuto el script `antispoofing.sh`:
-		(os) source demo-openrc.sh
+
+		(os)$ source demo-openrc.sh
 		(os)$ cd conf/antispoofing
 		(os)$ chmod +x antispoofing.sh
 		(os)$ ./antispoofing.sh
+		(os)$ deactivate
 
 	Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada.
 
