@@ -44,21 +44,21 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 
 Voy a crear un entorno virtual para instalar los clientes de openstack:
 
-		$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
+	$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
 
-		$ virtualenv os
-		$ source os/bin/activate
-		(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
+	$ virtualenv os
+	$ source os/bin/activate
+	(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
 
 ### Ejecuto el script `antispoofing.sh`
 
-		(os)$ source demo-openrc.sh
-		(os)$ cd conf/antispoofing
-		(os)$ chmod +x antispoofing.sh
-		(os)$ ./antispoofing.sh
-		(os)$ deactivate
+	(os)$ source demo-openrc.sh
+	(os)$ cd conf/antispoofing
+	(os)$ chmod +x antispoofing.sh
+	(os)$ ./antispoofing.sh
+	(os)$ deactivate
 
-	Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada.
+Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada.
 
 
 ### Configuramos de forma automática el `cliente`
