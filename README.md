@@ -40,7 +40,9 @@ Si queremos eliminar la infraestrucutara creada:
 
 Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
 
-1) Voy a crear un entorno virtual para instalar los clientes de openstack:
+### Instalar nova-cli y neutron-cli
+
+Voy a crear un entorno virtual para instalar los clientes de openstack:
 
 		$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
 
@@ -48,7 +50,7 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 		$ source os/bin/activate
 		(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
 
-2) Ejecuto el script `antispoofing.sh`:
+### Ejecuto el script `antispoofing.sh`
 
 		(os)$ source demo-openrc.sh
 		(os)$ cd conf/antispoofing
@@ -59,7 +61,7 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 	Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada.
 
 
-3) Configuramos de forma automática el `cliente`:
+### Configuramos de forma automática el `cliente`
 
 Necesitamos intalar [fabric](http://www.fabfile.org/):
 
