@@ -17,7 +17,7 @@ Va a crear la siguiente infraestructura:
 
 * Una ip flotante para el `cliente`.
 * Las redes y subredes correspondientes: `red-ext`, `red-int`.
-* 3 instancias: `Cliente`, `controlador`,`compute1`
+* 3 instancias: `cliente`, `controlador`,`compute1`
 
 Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`.
 
@@ -30,5 +30,15 @@ Si queremos eliminar la infraestrucutara creada:
 
 	$ terraform destroy
 
+## Configuración de `cliente` como router
+
+Accedemos a `cliente` y actualizamos el sistema:
+
+	$ sudo apt-get update
+	$ sudo apt-get upgrade
+
+Nota: Hay que levantar la segunda interfaz, no se hace automáticamente al inciar la máquina.
+
+	
 
 
