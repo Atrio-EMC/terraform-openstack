@@ -74,7 +74,7 @@ O en un entorno virtual:
 A continuación ejecutamos la configuración de fabric:
 
 	$ cd conf/cliente
-	$ tab -H 172.22.X.X main
+	$ fab -H 172.22.X.X main
 
 El script realiza las siguientes tareas:
 
