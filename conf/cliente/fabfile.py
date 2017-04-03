@@ -34,7 +34,9 @@ def main():
 		put("~/.ssh/id_rsa", "~/.ssh/id_rsa",mode="400")
 	
 	# Configurar el /etc/hosts
-	hostname = sudo("cat /etc/hostname").split("\n")[1]
+	hostname = sudo("cat /etc/hostname")
+	if "\n" in hostname:
+		hostname=hostname.split("\n")[1]
 	hosts='''127.0.0.1 %s
 192.168.1.101 controller
 192.168.1.102 compute1'''% hostname
