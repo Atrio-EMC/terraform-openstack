@@ -13,4 +13,22 @@ Despliegue automático de Openstack usando terraform. La infraestructura que cre
 
 	$ terraform apply
 
+Va a crear la siguiente infraestructura:
+
+	* Una ip flotante para el `cliente`.
+	* Las redes y subredes correspondientes: `red-ext`, `red-int`.
+	* 3 instancias: `Cliente`, `controlador`,`compute1`
+
+Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`.
+
+Una vez concluido nos muestra la ip flotante:
+
+	Outputs:
+	address = 172.22.201.151
+
+Si queremos eliminar la infraestrucutara creada:
+
+	$ terraform destroy
+
+
 
