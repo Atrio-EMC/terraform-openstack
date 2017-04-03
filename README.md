@@ -28,7 +28,7 @@ Puedes modificar los distintos parámetros de configuración en el fichero `vari
 Una vez concluido nos muestra la ip flotante:
 
 	Outputs:
-	address = 172.22.201.151
+	address = 172.22.X.X
 
 Si queremos eliminar la infraestrucutara creada:
 
@@ -74,7 +74,7 @@ O en un entorno virtual:
 A continuación ejecutamos la configuración de fabric:
 
 	$ cd conf/cliente
-	$ tab -H 172.22.201.151 main
+	$ tab -H 172.22.X.X main
 
 El script realiza las siguientes tareas:
 
