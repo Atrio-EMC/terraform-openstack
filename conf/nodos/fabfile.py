@@ -15,3 +15,6 @@ def main():
 	except:
 		sudo('echo "\nauto ens4\niface ens4 inet dhcp">>/etc/network/interfaces.d/50-cloud-init.cfg')
 		sudo("ifup ens4")
+
+	# Instalo los paquetes necesarios
+	sudo("apt-get -y install language-pack-es")

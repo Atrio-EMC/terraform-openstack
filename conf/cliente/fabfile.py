@@ -28,7 +28,7 @@ def main():
 
 
 	# Instalo los paquetes necesarios
-	sudo("apt-get -y install ansible git aptitude")
+	sudo("apt-get -y install ansible git aptitude language-pack-es")
 	# Copiamos nuestra clave privada para acceder a las demás máquinas
 	if not exists('~/.ssh/id_rsa'):
 		put("~/.ssh/id_rsa", "~/.ssh/id_rsa",mode="400")
