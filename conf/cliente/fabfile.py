@@ -5,8 +5,8 @@ env.user   = "ubuntu"
    
 
 def main():
-	#sudo("apt-get update")
-	#sudo("apt-get -y upgrade")
+	sudo("apt-get update")
+	sudo("apt-get -y upgrade")
 
 
 	# Compruebo si ens4 está configurada

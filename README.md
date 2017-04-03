@@ -44,7 +44,6 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 
 		$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
 
-		$ export LC_ALL=C
 		$ virtualenv os
 		$ source os/bin/activate
 		(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
@@ -77,43 +76,8 @@ A continuación ejecutamos la configuración de fabric:
 
 El script realiza las siguientes tareas:
 
-
-
-3) Accedemos a `cliente` y configuro el enrutamiento:
-
-		$ iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o ens3 -j MASQUERADE
-	
-	En `etc/sysctl.conf`:
-
-		net.ipv4.ip_forward=1
-	
-		$ sysctl -p
-
-## Configuración final de `cliente`:
-
-1) Accedemos a `cliente` y actualizamos el sistema:
-
-		$ sudo apt-get update
-		$ sudo apt-get upgrade
-
-2) Hay que levantar la segunda interfaz, no se hace automáticamente al iniciar la máquina.
-
-		$ sudo nano /etc/network/interfaces.d/50-cloud-init.cfg
-
-		...
-		auto ens4
-		iface ens4 inet dhcp	
-
-		$ sudo ifup ens4
-
-3) Instalamos los paquetes necesarios
-
-		$ apt-get install ansible git aptitude
-
-4) Copiamos nuestra clave privada para acceder a las demás máquinas
-
-		
-
-
-
-
+* Actualiza el sistema
+* Levanta la segunda interfaz
+* Configura el enrutamiento 
+* Instala los paquetes necesarios: git, ansible, aptitude
+* Copia la clave privada al cliente para poder acceder a los nodos
