@@ -50,8 +50,8 @@ Voy a crear un entorno virtual para instalar los clientes de openstack:
 
 ### Ejecuto el script `antispoofing.sh`
 
-	(os)$ source demo-openrc.sh
 	(os)$ cd conf/antispoofing
+	(os)$ source demo-openrc.sh
 	(os)$ chmod +x antispoofing.sh
 	(os)$ ./antispoofing.sh
 	(os)$ deactivate
