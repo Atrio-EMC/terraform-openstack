@@ -32,6 +32,12 @@ Si queremos eliminar la infraestrucutara creada:
 
 ## Configuración de `cliente` como router
 
+
+
+
+
+pip install appdirs pyparsing fabric  
+
 Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
 
 1) Voy a crear un entorno virtual para instalar los clientes de openstack:
@@ -43,12 +49,15 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 		(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
 
 2) Ejecuto el script `antispoofing.sh`:
+		(os) source demo----
+		(os)$ cd router
+		(os)$ chmod +x antispoofing.sh
+		(os)$ ./antispoofing.sh
 
-		$ cd router
-		$ chmod +x antispoofing.sh
-		$ ./antispoofing.sh
+	Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada.
 
-	Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada-
+
+
 
 3) Accedemos a `cliente` y configuro el enrutamiento:
 
@@ -83,7 +92,7 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 
 4) Copiamos nuestra clave privada para acceder a las demás máquinas
 
-
+		
 
 
 
