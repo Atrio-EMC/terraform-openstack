@@ -36,28 +36,52 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 
 1) Voy a crear un entorno virtual para instalar los clientes de openstack:
 
-	$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
+		$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
 
-	$ export LC_ALL=C
-	$ virtualenv os
-	(os)$ pip install requests python-novaclient python-neutronclient
+		$ export LC_ALL=C
+		$ virtualenv os
+		(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
 
+2) Ejecuto el script `antispoofing.sh`:
 
+		$ cd router
+		$ chmod +x antispoofing.sh
+		$ ./antispoofing.sh
 
-Accedemos a `cliente` y actualizamos el sistema:
+	Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada-
 
-	$ sudo apt-get update
-	$ sudo apt-get upgrade
+3) Accedemos a `cliente` y configuro el enrutamiento:
 
-Nota: Hay que levantar la segunda interfaz, no se hace automáticamente al iniciar la máquina.
+		$ iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o ens3 -j MASQUERADE
+	
+	En `etc/sysctl.conf`:
 
-	$ sudo nano /etc/network/interfaces.d/50-cloud-init.cfg
+		net.ipv4.ip_forward=1
+	
+		$ sysctl -p
 
-	...
-	auto ens4
-	iface ens4 inet dhcp
+## Configuración final de `cliente`:
 
-	$ sudo ifup ens4
+1) Accedemos a `cliente` y actualizamos el sistema:
+
+		$ sudo apt-get update
+		$ sudo apt-get upgrade
+
+2) Hay que levantar la segunda interfaz, no se hace automáticamente al iniciar la máquina.
+
+		$ sudo nano /etc/network/interfaces.d/50-cloud-init.cfg
+
+		...
+		auto ens4
+		iface ens4 inet dhcp	
+
+		$ sudo ifup ens4
+
+3) Instalamos los paquetes necesarios
+
+		$ apt-get install ansible git aptitude
+
+4) Copiamos nuestra clave privada para acceder a las demás máquinas
 
 
 
