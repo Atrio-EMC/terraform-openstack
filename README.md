@@ -11,6 +11,10 @@ Despliegue automático de Openstack usando terraform. La infraestructura que cre
 
 [Descarga de terraform](https://www.terraform.io/downloads.html).
 
+Clonamos nuestro repositorio:
+
+	$ git clone git@github.com:iesgn/terraform-openstack.git
+	$ cd terraform-openstack
 	$ terraform apply
 
 Va a crear la siguiente infraestructura:
@@ -34,10 +38,6 @@ Si queremos eliminar la infraestrucutara creada:
 
 
 
-
-
-pip install appdirs pyparsing fabric  
-
 Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
 
 1) Voy a crear un entorno virtual para instalar los clientes de openstack:
@@ -46,16 +46,36 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 
 		$ export LC_ALL=C
 		$ virtualenv os
+		$ source os/bin/activate
 		(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
 
 2) Ejecuto el script `antispoofing.sh`:
-		(os) source demo----
-		(os)$ cd router
+		(os) source demo-openrc.sh
+		(os)$ cd conf/antispoofing
 		(os)$ chmod +x antispoofing.sh
 		(os)$ ./antispoofing.sh
 
 	Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada.
 
+
+3) Configuramos de forma automática el `cliente`:
+
+Necesitamos intalar [fabric](http://www.fabfile.org/):
+
+	# apt-get install fabric
+
+O en un entorno virtual:
+
+	$ virtualenv fabric
+	$ source fabric/bin/activate
+	(fabric)$ pip install appdirs pyparsing fabric  
+
+A continuación ejecutamos la configuración de fabric:
+
+	$ cd conf/cliente
+	$ tab -H 172.22.201.151 main
+
+El script realiza las siguientes tareas:
 
 
 
