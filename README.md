@@ -98,6 +98,7 @@ El script realiza las siguientes tareas:
 
 * Actualiza el sistema
 * Levanta la segunda interfaz
+* Instala los paquetes necesarios: python, aptitude
 * Configura el /etc/hosts
 
 ## Ejecución de la receta de ansible
