@@ -83,6 +83,7 @@ El script realiza las siguientes tareas:
 * Configura el enrutamiento 
 * Instala los paquetes necesarios: git, ansible, aptitude
 * Copia la clave privada al cliente para poder acceder a los nodos
+* Configura el /etc/hosts
 
 ## Configuración de los nodos
 
@@ -97,3 +98,4 @@ El script realiza las siguientes tareas:
 
 * Actualiza el sistema
 * Levanta la segunda interfaz
+* Configura el /etc/hosts
