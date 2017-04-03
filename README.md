@@ -81,18 +81,16 @@ El script realiza las siguientes tareas:
 * Actualiza el sistema
 * Levanta la segunda interfaz
 * Configura el enrutamiento 
-* Instala los paquetes necesarios: git, ansible, aptitude
+* Instala los paquetes necesarios: git, ansible, aptitude, fabric
 * Copia la clave privada al cliente para poder acceder a los nodos
 * Configura el /etc/hosts
 
 ## Configuración de los nodos
 
-Desde el `cliente`  vamos a configurar de forma automática los nodos con fabric:
+Desde el `cliente`  vamos a configurar de forma automática los nodos con fabric, descargamos el script fabric:
 
-Instalamos fabric y descargamos el script fabric:
-
-	$ wget https://raw.githubusercontent.com/iesgn/terraform-openstack/master/conf/nodos/fabfile.py 
-	$ fab -H 192.168.1.101,192.168.1.102 main
+	$ curl -L  https://raw.githubusercontent.com/iesgn/terraform-openstack/master/conf/nodos/fabfile.py > fabfile.py
+	$ fab -H controller,compute1 main
 
 El script realiza las siguientes tareas:
 
