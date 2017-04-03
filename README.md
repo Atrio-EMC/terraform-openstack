@@ -37,8 +37,17 @@ Accedemos a `cliente` y actualizamos el sistema:
 	$ sudo apt-get update
 	$ sudo apt-get upgrade
 
-Nota: Hay que levantar la segunda interfaz, no se hace automáticamente al inciar la máquina.
+Nota: Hay que levantar la segunda interfaz, no se hace automáticamente al iniciar la máquina.
 
-	
+	$ sudo nano /etc/network/interfaces.d/50-cloud-init.cfg
+
+	...
+	auto ens4
+	iface ens4 inet dhcp
+
+	$ sudo ifup ens4
+
+
+
 
 
