@@ -108,4 +108,5 @@ Clonamos nuestro repositorio:
 
 Y lo ejecutamos:
 
+	$ cd openstack-ubuntu-ansible
 	$ ansible-playbook site.yml --sudo
