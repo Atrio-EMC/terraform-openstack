@@ -90,7 +90,7 @@ Desde el `cliente`  vamos a configurar de forma automática los nodos con fabric
 
 Instalamos fabric y descargamos el script fabric:
 
-	$ wget https://raw.githubusercontent.com/iesgn/terraform-openstack/master/conf/nodos/fabfile.py > fabfile.py
+	$ wget https://raw.githubusercontent.com/iesgn/terraform-openstack/master/conf/nodos/fabfile.py 
 	$ fab -H 192.168.1.101,192.168.1.102 main
 
 El script realiza las siguientes tareas:
