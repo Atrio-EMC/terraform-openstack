@@ -37,8 +37,8 @@ def main():
 	hostname = sudo("cat /etc/hostname")
 	if "\n" in hostname:
 		hostname=hostname.split("\n")[1]
-	hosts='''127.0.0.1 %s
+		hosts='''127.0.0.1 %s
 192.168.1.101 controller
 192.168.1.102 compute1'''% hostname
 
-	sudo('echo "%s">>/etc/hosts'%hosts)
+		sudo('echo "%s">>/etc/hosts'%hosts)
