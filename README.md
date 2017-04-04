@@ -42,21 +42,15 @@ Antes de configurar la máquina como router, hay que desactivar el antispoofing 
 
 Voy a crear un entorno virtual para instalar los clientes de openstack:
 
-	$ apt-get install build-essential python-virtualenv python-dev python-virtualenv libssl-dev libffi-dev
+	$ apt-get install build-essential python-virtualenv python-dev libssl-dev libffi-dev
 
 	$ virtualenv os
 	$ source os/bin/activate
-	(os)$ pip install requests python-novaclient==6.0.0 python-neutronclient==6.0.0
+	(os)$ pip install requests python-neutronclient
 
-### Ejecuto el script `antispoofing.sh`
+Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver) (recordamos que debe estar habiliatado la extensión `port security`), hay que desactivar el flag `port_security_enabled` en los dos puertos correspondientes a las interfaces de ´cliente´:
 
-	(os)$ cd conf/antispoofing
-	(os)$ source demo-openrc.sh
-	(os)$ chmod +x antispoofing.sh
-	(os)$ ./antispoofing.sh
-	(os)$ deactivate
-
-Este script quita los grupos de seguridad de `cliente` y desactiva la extensión `port-security` de las dos redes a la que está conectada.
+	neutron port-update  <Port_id> --port-security-enabled=False
 
 
 ### Configuramos de forma automática el `cliente`
@@ -82,7 +76,7 @@ El script realiza las siguientes tareas:
 * Levanta la segunda interfaz
 * Configura el enrutamiento 
 * Instala los paquetes necesarios: git, ansible, aptitude, fabric
-* Copia la clave privada al cliente para poder acceder a los nodos
+* Crea una clave ssh
 * Configura el /etc/hosts
 
 ## Configuración de los nodos
@@ -97,6 +91,7 @@ El script realiza las siguientes tareas:
 * Actualiza el sistema
 * Levanta la segunda interfaz
 * Instala los paquetes necesarios: python, aptitude
+* Copia la clave publica ssh del cliente al nodo
 * Configura el /etc/hosts
 
 ## Ejecución de la receta de ansible
