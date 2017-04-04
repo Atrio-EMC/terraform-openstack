@@ -7,8 +7,6 @@ variable "auth_url" { default = "https://jupiter.gonzalonazareno.org:5000/v3"}
 variable "cacert_file" {default = "gonzalonazareno.cty" }
 
 
-
-
 # Nombre de la red externa de nuestra instalación de Openstack
 variable "ext-net" { default = "ext-net"}
 

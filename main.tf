@@ -37,7 +37,6 @@ resource "openstack_networking_subnet_v2" "subred-int" {
   name = "subred-int"
   network_id = "${openstack_networking_network_v2.red-int.id}"
   cidr = "${var.ip_subred-int}"
-  #dns_nameservers = "${var.dns_subred-ext}"
   ip_version = 4
 
 }
