@@ -53,7 +53,7 @@ resource "openstack_compute_instance_v2" "cliente" {
     this = "that"
   }
   network {
-    name = "demo-net"
+    name = "${var.red_ext_cliente}"
     floating_ip = "${openstack_compute_floatingip_v2.myip.address}"
 
   }
