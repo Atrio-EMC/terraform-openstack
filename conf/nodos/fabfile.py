@@ -17,7 +17,7 @@ def main():
 		sudo("ifup ens4")
 
 	# Instalo los paquetes necesarios
-	sudo("apt-get -y install language-pack-es python aptitude")
+	sudo("apt-get -y install language-pack-es python aptitude python-shade")
 
 	# Copio la clave publica a los nodos
 
