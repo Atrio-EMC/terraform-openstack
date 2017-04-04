@@ -29,7 +29,7 @@ def main():
 
 	# Instalo los paquetes necesarios
 	sudo("apt-get -y install ansible git aptitude language-pack-es fabric")
-	# Copiamos nuestra clave privada para acceder a las demás máquinas
+	# Creamos una nueva clave ssh
 	if not exists('~/.ssh/id_rsa'):
 		run('ssh-keygen -f ~/.ssh/id_rsa -q -N ""')
 	
