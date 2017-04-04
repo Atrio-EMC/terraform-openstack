@@ -31,7 +31,7 @@ def main():
 	sudo("apt-get -y install ansible git aptitude language-pack-es fabric")
 	# Copiamos nuestra clave privada para acceder a las demás máquinas
 	if not exists('~/.ssh/id_rsa'):
-		put("~/.ssh/id_rsa", "~/.ssh/id_rsa",mode="400")
+		run('ssh-keygen -f ~/.ssh/id_rsa -q -N ""')
 	
 	# Configurar el /etc/hosts
 	hostname = sudo("cat /etc/hostname")

@@ -19,6 +19,11 @@ def main():
 	# Instalo los paquetes necesarios
 	sudo("apt-get -y install language-pack-es python aptitude")
 
+	# Copio la clave publica a los nodos
+
+	put("~/.ssh/id_rsa.pub","/tmp")
+	run('cat /tmp/id_rsa.pub>>~/.ssh/authorized_keys')
+
 	# Configurar el /etc/hosts
 	hostname = sudo("cat /etc/hostname")
 	if "\n" in hostname:
