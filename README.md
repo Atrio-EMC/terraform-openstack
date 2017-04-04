@@ -46,9 +46,14 @@ Voy a crear un entorno virtual para instalar los clientes de openstack:
 
 	$ virtualenv os
 	$ source os/bin/activate
-	(os)$ pip install requests python-neutronclient
+	(os)$ pip install requests python-novaclient python-neutronclient
 
-Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver) (recordamos que debe estar habiliatado la extensión `port security`), hay que desactivar el flag `port_security_enabled` en los dos puertos correspondientes a las interfaces de ´cliente´:
+Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver) (recordamos que debe estar habiliatado la extensión `port security`), hay que quitar el grupo de seguridad a `cliente`:
+
+	nova remove-secgroup cliente default
+
+
+Y desactivar el flag `port_security_enabled` en los dos puertos correspondientes a las interfaces de ´cliente´:
 
 	neutron port-update  <Port_id> --port-security-enabled=False
 
