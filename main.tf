@@ -1,11 +1,11 @@
 # Configure the OpenStack Provider
 provider "openstack" {
-        user_name  = "demo"
-        tenant_name = "demo"
-        domain_name = "default"
+        user_name  = "${var.user_name}"
+        tenant_name = "${var.tenant_name}"
+        domain_name = "${var.domain_name}"
         password  = "${var.secret_key}"
-        auth_url  = "https://jupiter.gonzalonazareno.org:5000/v3"
-        cacert_file = "gonzalonazareno.crt"
+        auth_url  = "${var.auth_url}"
+        cacert_file = "${var.cacert_file}"
 }
 
 
