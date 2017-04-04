@@ -9,7 +9,7 @@ variable "cacert_file" {default = "gonzalonazareno.crt" }
 
 # Nombre de la red externa de nuestra instalación de Openstack
 variable "ext-net" { default = "ext-net"}
-variable "red_ext_cliente" { default = "demo_net"}
+variable "red_ext_cliente" { default = "demo-net"}
 
 
 # Red externa
