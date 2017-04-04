@@ -36,7 +36,7 @@ Si queremos eliminar la infraestrucutara creada:
 
 ## Configuración del `cliente` 
 
-Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
+Todas estas configuraciones se van a realizar desde nuestro host. Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
 
 ### Instalar nova-cli y neutron-cli
 
