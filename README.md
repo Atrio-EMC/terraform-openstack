@@ -110,8 +110,8 @@ El script realiza las siguientes tareas:
 
 Clonamos nuestro repositorio:
 
-	$ git clone -b ocata git@github.com:iesgn/openstack-ubuntu-ansible.git
-
+	$ git clone -b ocata https://github.com/iesgn/openstack-ubuntu-ansible.git
+	
 Y lo ejecutamos:
 
 	$ cd openstack-ubuntu-ansible
