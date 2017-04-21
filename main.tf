@@ -79,7 +79,6 @@ resource "openstack_compute_floatingip_associate_v2" "myip" {
         type = "ssh"
         user = "ubuntu"
         private_key = "${file("${var.ssh_key_file}")}"
-        timeout = "5s"
         }
   }
 
