@@ -58,7 +58,6 @@ resource "openstack_compute_instance_v2" "cliente" {
   }
   network {
     name = "${var.red_ext_cliente}"
-    floating_ip = "${openstack_networking_floatingip_v2.myip.address}"
   }
 
   network {
