@@ -55,6 +55,13 @@ Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron
 
 Y desactivar el flag `port_security_enabled` en los dos puertos correspondientes a las interfaces de ´cliente´:
 
+	 neutron port-list
+	...
+	| 84e7c85b-33bc-4515-a53d-d94fa5e51dc4 |      | fa:16:3e:6b:55:dd | {"subnet_id": "d3d75f07-8a31-49fb-9b37-ce627ca0f10b", "ip_address": "10.0.0.3"}        |
+	...
+	| bce643f1-a059-45c3-be36-2d37d3af110a |      | fa:16:3e:c3:b5:1c | {"subnet_id": "b87e6216-5706-470f-a26c-a79b5b4b7288", "ip_address": "192.168.1.1"}     |
+	...
+
 	neutron port-update  <Port_id> --port-security-enabled=False
 
 
