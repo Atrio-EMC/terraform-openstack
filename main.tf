@@ -13,7 +13,7 @@ resource "openstack_compute_keypair_v2" "terraform" {
   public_key = "${file("${var.ssh_key_file}.pub")}"
 }
 
-resource "openstack_compute_floatingip_v2" "myip" {
+resource "openstack_networking_floatingip_v2" "myip" {
   pool = "${var.ext-net}"
 }
 
@@ -58,20 +58,32 @@ resource "openstack_compute_instance_v2" "cliente" {
   }
   network {
     name = "${var.red_ext_cliente}"
-    floating_ip = "${openstack_compute_floatingip_v2.myip.address}"
-
   }
+
   network {
     uuid = "${openstack_networking_network_v2.red-ext.id}"
     fixed_ip_v4 = "${var.gateway-ext}"
   }
 
   provisioner "file" {
-    source      = "${file("${var.ssh_key_file}")}"
-    destination = "~/.ssh/id_rsa.pub"
+    source      = "${var.ssh_key_file}"
+    destination = "~/.ssh/id_rsa"
+    connection {
+        type = "ssh"
+        user = "ubuntu"
+        private_key = "${var.ssh_key_file}"
+        timeout = "5s"
+        }
   }
 
 }
+
+resource "openstack_compute_floatingip_associate_v2" "myip" {
+  floating_ip = "${openstack_networking_floatingip_v2.myip.address}"
+  instance_id = "${openstack_compute_instance_v2.cliente.id}"
+  fixed_ip    = "${openstack_compute_instance_v2.cliente.network.1.fixed_ip_v4}"
+}
+
 
 resource "openstack_compute_instance_v2" "controller" {
   name = "controller"
