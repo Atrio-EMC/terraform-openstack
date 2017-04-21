@@ -8,6 +8,10 @@ provider "openstack" {
         cacert_file = "${var.cacert_file}"
 }
 
+resource "openstack_compute_keypair_v2" "terraform" {
+  name       = "${var.key_ssh}"
+  public_key = "${file("${var.ssh_key_file}.pub")}"
+}
 
 resource "openstack_compute_floatingip_v2" "myip" {
   pool = "${var.ext-net}"
@@ -60,6 +64,11 @@ resource "openstack_compute_instance_v2" "cliente" {
   network {
     uuid = "${openstack_networking_network_v2.red-ext.id}"
     fixed_ip_v4 = "${var.gateway-ext}"
+  }
+
+  provisioner "file" {
+    source      = "${file("${var.ssh_key_file}")}"
+    destination = "~/.ssh/id_rsa.pub"
   }
 
 }

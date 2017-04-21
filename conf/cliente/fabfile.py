@@ -25,13 +25,8 @@ def main():
 	sudo('sed -i -e s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g /etc/sysctl.conf')
 	sudo('sysctl -p')
 
-
-
 	# Instalo los paquetes necesarios
 	sudo("apt-get -y install ansible git aptitude language-pack-es fabric")
-	# Creamos una nueva clave ssh
-	if not exists('~/.ssh/id_rsa'):
-		run('ssh-keygen -f ~/.ssh/id_rsa -q -N ""')
 	
 	# Configurar el /etc/hosts
 	hostname = sudo("cat /etc/hostname")

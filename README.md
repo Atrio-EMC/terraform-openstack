@@ -5,7 +5,7 @@ Despliegue automático de Openstack usando terraform. La infraestructura que cre
 ![schema](https://github.com/iesgn/terraform-openstack/raw/master/img/tos.png)
 
 * La infraestructura de Openstack consta de un controlador y un nodo de computo que se van a crear en dos redes internas (`red-ext` y `red-int`).
-* Desde la máquina `cliente` vamos a controlar nuestra instalación de opnstack: hay que configurarla como router, para que las máquinas de openstack tengan conexión a internet, desde ella vamos a ejecutar las recetas ansible de instalación y vamos acceder a las instancias creadas.
+* Desde la máquina `cliente` vamos a controlar nuestra instalación de openstack: hay que configurarla como router, para que las máquinas de openstack tengan conexión a internet, desde ella vamos a ejecutar las recetas ansible de instalación y vamos acceder a las instancias creadas.
 
 ## Creación de la infraestrucutra con terraform
 
@@ -15,6 +15,13 @@ Clonamos nuestro repositorio:
 
 	$ git clone git@github.com:iesgn/terraform-openstack.git
 	$ cd terraform-openstack
+
+A continuación creamos las claves ssh que vamos a utilizar en la creación de las máquinas del escenario:
+
+	$ ssh-keygen -f ~/.ssh/id_rsa.terraform -N ""
+
+Y creamos la infraestructura con la siguiente instrucción:
+
 	$ terraform apply
 
 Va a crear la siguiente infraestructura:
@@ -22,6 +29,8 @@ Va a crear la siguiente infraestructura:
 * Una ip flotante para el `cliente`.
 * Las redes y subredes correspondientes: `red-ext`, `red-int`.
 * 3 instancias: `cliente`, `controlador`,`compute1`
+* En cada instancia se ha añadido la clave ssh que hemos creado.
+* En el `cliente` se ha añadido la clave privada para poder acceder a las otras máquinas.
 
 Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`.
 
@@ -88,7 +97,6 @@ El script realiza las siguientes tareas:
 * Levanta la segunda interfaz
 * Configura el enrutamiento 
 * Instala los paquetes necesarios: git, ansible, aptitude, fabric
-* Crea una clave ssh
 * Configura el /etc/hosts
 
 ## Configuración de los nodos
@@ -103,7 +111,6 @@ El script realiza las siguientes tareas:
 * Actualiza el sistema
 * Levanta la segunda interfaz
 * Instala los paquetes necesarios: python, aptitude
-* Copia la clave publica ssh del cliente al nodo
 * Configura el /etc/hosts
 
 ## Ejecución de la receta de ansible
