@@ -48,8 +48,8 @@ resource "openstack_networking_subnet_v2" "subred-int" {
 resource "openstack_compute_instance_v2" "cliente" {
   name = "cliente"
   region = "RegionOne"
-  image_id = "${var.imagen}"
-  flavor_id = "${var.sabor}"
+  image_name = "${var.imagen}"
+  flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
   security_groups = ["default"]
 
@@ -65,31 +65,32 @@ resource "openstack_compute_instance_v2" "cliente" {
     fixed_ip_v4 = "${var.gateway-ext}"
   }
 
+}
+
+resource "openstack_compute_floatingip_associate_v2" "myip" {
+  floating_ip = "${openstack_networking_floatingip_v2.myip.address}"
+  instance_id = "${openstack_compute_instance_v2.cliente.id}"
+  fixed_ip    = "${openstack_compute_instance_v2.cliente.network.0.fixed_ip_v4}"
+  
   provisioner "file" {
     source      = "${var.ssh_key_file}"
     destination = "~/.ssh/id_rsa"
     connection {
         type = "ssh"
         user = "ubuntu"
-        private_key = "${var.ssh_key_file}"
+        private_key = "${file("${var.ssh_key_file}")}"
         timeout = "5s"
         }
   }
 
 }
 
-resource "openstack_compute_floatingip_associate_v2" "myip" {
-  floating_ip = "${openstack_networking_floatingip_v2.myip.address}"
-  instance_id = "${openstack_compute_instance_v2.cliente.id}"
-  fixed_ip    = "${openstack_compute_instance_v2.cliente.network.1.fixed_ip_v4}"
-}
-
 
 resource "openstack_compute_instance_v2" "controller" {
   name = "controller"
   region = "RegionOne"
-  image_id = "${var.imagen}"
-  flavor_id = "${var.sabor}"
+  image_name = "${var.imagen}"
+  flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
   security_groups = ["default"]
 
@@ -112,8 +113,8 @@ resource "openstack_compute_instance_v2" "controller" {
 resource "openstack_compute_instance_v2" "compute1" {
   name = "compute1"
   region = "RegionOne"
-  image_id = "${var.imagen}"
-  flavor_id = "${var.sabor}"
+  image_name = "${var.imagen}"
+  flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
   security_groups = ["default"]
 

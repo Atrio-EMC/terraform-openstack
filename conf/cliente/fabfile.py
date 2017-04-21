@@ -25,6 +25,8 @@ def main():
 	sudo('sed -i -e s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g /etc/sysctl.conf')
 	sudo('sysctl -p')
 
+
+
 	# Instalo los paquetes necesarios
 	sudo("apt-get -y install ansible git aptitude language-pack-es fabric")
 	
