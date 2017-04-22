@@ -96,6 +96,7 @@ El script realiza las siguientes tareas:
 * Actualiza el sistema
 * Levanta la segunda interfaz
 * Configura el enrutamiento 
+* Configura permisos de la clave privada
 * Instala los paquetes necesarios: git, ansible, aptitude, fabric
 * Configura el /etc/hosts
 
