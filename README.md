@@ -71,6 +71,15 @@ Y desactivar el flag `port_security_enabled` en los dos puertos correspondientes
 	| bce643f1-a059-45c3-be36-2d37d3af110a |      | fa:16:3e:c3:b5:1c | {"subnet_id": "b87e6216-5706-470f-a26c-a79b5b4b7288", "ip_address": "192.168.1.1"}     |
 	...
 
+
+Y en los pueros correspondientes a las interfaces de ´controller´:
+
+	$ neutron port-list
+	...
+	| 8a630045-4804-43a5-b3e2-55f1e3d98614 |      | fa:16:3e:04:cf:61 | {"subnet_id": "7da49d4f-798d-46be-9302-ee38599d5f5c", "ip_address": "192.168.1.101"}   |
+	...
+	| ce8cbce4-4a0d-4d1b-8e9e-c57044c035e9 |      | fa:16:3e:30:81:c8 | {"subnet_id": "3ac661be-642a-4c0a-adef-364d0f981ab3", "ip_address": "192.168.221.101"} |
+	
 	neutron port-update  <Port_id> --port-security-enabled=False
 
 
