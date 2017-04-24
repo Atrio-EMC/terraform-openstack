@@ -90,7 +90,7 @@ resource "openstack_compute_instance_v2" "controller" {
   name = "controller"
   region = "RegionOne"
   image_name = "${var.imagen}"
-  flavor_name = "${var.sabor_controller}"
+  flavor_name = "${var.sabor_controller }"
   key_pair = "${var.key_ssh}"
   security_groups = ["default"]
 
