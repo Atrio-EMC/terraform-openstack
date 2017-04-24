@@ -24,6 +24,7 @@ variable "ip_subred-int" {default = "192.168.221.0/24"}
 #Configuración de las máquinas
 variable "imagen" {default = "Ubuntu Xenial 16.04 LTS"} 
 variable "sabor" {default = "m2.large"} 
+variable "sabor_controller" {default = "m2.xlarge"} 
 variable "key_ssh" {default = "terraform_key"}
 variable "ssh_key_file" {default = "~/.ssh/id_rsa.terraform"}
 
