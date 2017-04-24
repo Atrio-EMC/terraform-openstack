@@ -73,7 +73,7 @@ Y desactivar el flag `port_security_enabled` en los dos puertos correspondientes
 	...
 
 
-Y en los pueros correspondientes a las interfaces de ´controller´:
+Y en los puertos correspondientes a las interfaces de ´controller´:
 
 	$ neutron port-list
 	...
