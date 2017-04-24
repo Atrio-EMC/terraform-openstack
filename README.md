@@ -134,3 +134,36 @@ Y lo ejecutamos:
 
 	$ cd openstack-ubuntu-ansible
 	$ ansible-playbook site.yml --sudo
+
+## Acceder a horizon a través de `cliente`
+
+Vamos a instalar un proxy inverso en `cliente` con apache2, para ello:
+
+	$ apt-get install apache2
+
+	$ a2enmod proxy
+	$ a2enmod proxy_wstunnel
+	$ a2enmod proxy_http
+
+Y el fichero de configuración `/etc/apache2/sites-available/000-default`:
+
+	<VirtualHost *:80>
+    #ServerName publicdomin.name
+    ProxyPreserveHost On
+    ProxyPass / http://192.168.1.101/
+    ProxyPassReverse / http://192.168.1.101/
+
+	</VirtualHost>
+
+	<VirtualHost *:6080>
+    #ServerName publicdomain.name
+    ProxyPreserveHost On
+    ProxyRequests On
+    ProxyPass /websockify ws://192.168.1.101:6080/websockify  retry=3
+    ProxyPass / http://192.168.1.101:6080/ retry=1
+    ProxyPassReverse / http://192.168.1.101:6080/ retry=1
+	</VirtualHost>
+
+	$ service apache2 restart
+
+Para más información:[https://ask.openstack.org/en/question/7102/connecting-vnc-from-wan-behind-a-apache-246-proxy/](https://ask.openstack.org/en/question/7102/connecting-vnc-from-wan-behind-a-apache-246-proxy/).
