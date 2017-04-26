@@ -20,7 +20,7 @@ A continuación creamos las claves ssh que vamos a utilizar en la creación de l
 
 	$ ssh-keygen -f ~/.ssh/id_rsa.terraform -N ""
 
-Cargamos las credenciales de OpenStcak:
+Cargamos las credenciales de OpenStack:
 
 	$ source demo-openrc.sh
 
