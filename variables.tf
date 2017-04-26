@@ -37,3 +37,7 @@ variable "controller_ip_int" {default = "192.168.221.101"}
 variable "compute1_ip_ext" {default = "192.168.1.102"}
 variable "compute1_ip_int" {default = "192.168.221.102"}
 
+#Configuración del volumen
+
+variable "device" {default = "/dev/vdb"}
+
