@@ -39,17 +39,17 @@ Una vez concluido nos muestra la ip flotante:
 	Outputs:
 	address = 172.22.X.X
 
-Si queremos eliminar la infraestrucutara creada:
+Si queremos eliminar la infraestructura creada:
 
 	$ terraform destroy
 
 ## Configuración de la red
 
-Todas estas configuraciones se van a realizar desde nuestro puesto de trabajo. Para permitir la comunicación entre las máquinas de nuestro escenario, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
+Para permitir la comunicación entre las máquinas de nuestro escenario, hay que desactivar el antispoofing gestionando la extensión `port-security` en todas las redes de nuestra infraestructura.
 
 ### Instalar nova-cli y neutron-cli
 
-Voy a crear un entorno virtual para instalar los clientes de openstack:
+Voy a crear un entorno virtual, en mi puesto de trabajo, para instalar los clientes de openstack:
 
 	$ apt-get install build-essential python-virtualenv python-dev libssl-dev libffi-dev
 
@@ -57,7 +57,7 @@ Voy a crear un entorno virtual para instalar los clientes de openstack:
 	$ source os/bin/activate
 	(os)$ pip install requests python-novaclient python-neutronclient
 
-Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver) (recordamos que debe estar habiliatado la extensión `port security`), hay que quitar el grupo de seguridad a `cliente` y a `controller`:
+Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver) (recordamos que debe estar habiliatado la extensión `port security`), hay que quitar el grupo de seguridad de las máquinas:
 
 	nova remove-secgroup cliente default
 	nova remove-secgroup controller default
@@ -66,17 +66,16 @@ Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron
 
 Y desactivar el flag `port_security_enabled` en los puertos correspondientes a las interfaces de ´cliente´:
 
-	 neutron port-list
-	
+	neutron port-list
 
-
-Y en los puertos correspondientes a las interfaces de ´controller´:
-
-	$ neutron port-list
+	...	
+	| 52791b7f-8e41-49f3-87cc-1b876ed002cb |      | fa:16:3e:a7:f9:8c | {"subnet_id": "cd9ccf2c-efc3-4222-b2a6-a1d0476e672e", "ip_address": "192.168.1.101"}   |
+	| 54ea6739-fb5d-4d8e-8283-e48aea7daa4f |      | fa:16:3e:74:dd:c0 | {"subnet_id": "cd9ccf2c-efc3-4222-b2a6-a1d0476e672e", "ip_address": "192.168.1.102"}   |
+	| 562f0933-ecff-40e1-abe8-1a8d13e2c61e |      | fa:16:3e:4a:34:58 | {"subnet_id": "4938e49e-4a39-4758-9a7d-42870aa85971", "ip_address": "192.168.221.102"} |
+	| 651a41bd-0a56-496d-9a00-44aebb9adc3b |      | fa:16:3e:e2:9d:35 | {"subnet_id": "b00bed14-5b74-4402-a524-bebf2e10ff66", "ip_address": "10.0.0.10"}       |
+	| 8d9e0572-302c-4403-8f3f-577d73517941 |      | fa:16:3e:3c:b9:52 | {"subnet_id": "4938e49e-4a39-4758-9a7d-42870aa85971", "ip_address": "192.168.221.101"} |
+	| e2057c3b-b99b-45a0-ae2c-587cc38e211c |      | fa:16:3e:8e:17:8f | {"subnet_id": "cd9ccf2c-efc3-4222-b2a6-a1d0476e672e", "ip_address": "192.168.1.1"}     |
 	...
-	| 8a630045-4804-43a5-b3e2-55f1e3d98614 |      | fa:16:3e:04:cf:61 | {"subnet_id": "7da49d4f-798d-46be-9302-ee38599d5f5c", "ip_address": "192.168.1.101"}   |
-	...
-	| ce8cbce4-4a0d-4d1b-8e9e-c57044c035e9 |      | fa:16:3e:30:81:c8 | {"subnet_id": "3ac661be-642a-4c0a-adef-364d0f981ab3", "ip_address": "192.168.221.101"} |
 	
 	neutron port-update  <Port_id> --port-security-enabled=False
 
