@@ -133,3 +133,14 @@ resource "openstack_compute_instance_v2" "compute1" {
   }
 
 }
+
+resource "openstack_blockstorage_volume_v2" "vol1" {
+  name = "volume_cinder"
+  size = 40
+}
+
+resource "openstack_blockstorage_volume_attach_v2" "va_1" {
+  volume_id = "${openstack_blockstorage_volume_v2.vol1.id}"
+  device = "/dev/vdb"
+  host_name = "controller"
+}
