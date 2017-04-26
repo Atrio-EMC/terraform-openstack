@@ -140,6 +140,7 @@ resource "openstack_blockstorage_volume_v2" "vol1" {
 }
 
 resource "openstack_blockstorage_volume_attach_v2" "va_1" {
+  device = "${var.region}"
   volume_id = "${openstack_blockstorage_volume_v2.vol1.id}"
   device = "${var.device}"
   host_name = "controller"

@@ -40,6 +40,7 @@ variable "compute1_ip_int" {default = "192.168.221.102"}
 #Configuración del volumen
 
 variable "device" {default = "/dev/vdb"}
-variable "size" {default = "30"}
+variable "size" {default = "10"}
+variable "region" {default = "RegionOne"}
 
 
