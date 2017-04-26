@@ -43,9 +43,9 @@ Si queremos eliminar la infraestrucutara creada:
 
 	$ terraform destroy
 
-## Configuración del `cliente` 
+## Configuración de la red
 
-Todas estas configuraciones se van a realizar desde nuestro host. Antes de configurar la máquina como router, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
+Todas estas configuraciones se van a realizar desde nuestro puesto de trabajo. Para permitir la comunicación entre las máquinas de nuestro escenario, hay que desactivar el antispoofing gestionando la extensión `port-security`, para ello:
 
 ### Instalar nova-cli y neutron-cli
 
@@ -61,16 +61,13 @@ Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron
 
 	nova remove-secgroup cliente default
 	nova remove-secgroup controller default
+	nova remove-secgroup compute1 default
 
 
-Y desactivar el flag `port_security_enabled` en los dos puertos correspondientes a las interfaces de ´cliente´:
+Y desactivar el flag `port_security_enabled` en los puertos correspondientes a las interfaces de ´cliente´:
 
 	 neutron port-list
-	...
-	| 84e7c85b-33bc-4515-a53d-d94fa5e51dc4 |      | fa:16:3e:6b:55:dd | {"subnet_id": "d3d75f07-8a31-49fb-9b37-ce627ca0f10b", "ip_address": "10.0.0.3"}        |
-	...
-	| bce643f1-a059-45c3-be36-2d37d3af110a |      | fa:16:3e:c3:b5:1c | {"subnet_id": "b87e6216-5706-470f-a26c-a79b5b4b7288", "ip_address": "192.168.1.1"}     |
-	...
+	
 
 
 Y en los puertos correspondientes a las interfaces de ´controller´:
@@ -84,9 +81,9 @@ Y en los puertos correspondientes a las interfaces de ´controller´:
 	neutron port-update  <Port_id> --port-security-enabled=False
 
 
-### Configuramos de forma automática el `cliente`
+## Configuración del `cliente` 
 
-Necesitamos instalar [fabric](http://www.fabfile.org/):
+Desde nuestro puesto de trabajo, necesitamos instalar [fabric](http://www.fabfile.org/):
 
 	# apt-get install fabric
 
