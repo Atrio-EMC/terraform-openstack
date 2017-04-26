@@ -136,7 +136,7 @@ resource "openstack_compute_instance_v2" "compute1" {
 
 resource "openstack_blockstorage_volume_v2" "vol1" {
   name = "volume_cinder"
-  size = 40
+  size =  "${var.size}"
 }
 
 resource "openstack_blockstorage_volume_attach_v2" "va_1" {
