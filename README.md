@@ -72,7 +72,7 @@ Y desactivar el flag `port_security_enabled` en los puertos correspondientes a l
 	| 52791b7f-8e41-49f3-87cc-1b876ed002cb |      | fa:16:3e:a7:f9:8c | {"subnet_id": "cd9ccf2c-efc3-4222-b2a6-a1d0476e672e", "ip_address": "192.168.1.101"}   |
 	| 54ea6739-fb5d-4d8e-8283-e48aea7daa4f |      | fa:16:3e:74:dd:c0 | {"subnet_id": "cd9ccf2c-efc3-4222-b2a6-a1d0476e672e", "ip_address": "192.168.1.102"}   |
 	| 562f0933-ecff-40e1-abe8-1a8d13e2c61e |      | fa:16:3e:4a:34:58 | {"subnet_id": "4938e49e-4a39-4758-9a7d-42870aa85971", "ip_address": "192.168.221.102"} |
-	| 651a41bd-0a56-496d-9a00-44aebb9adc3b |      | fa:16:3e:e2:9d:35 | {"subnet_id": "b00bed14-5b74-4402-a524-bebf2e10ff66", "ip_address": "10.0.0.10"}       |
+	| 651a41bd-0a56-496d-9a00-44aebb9adc3b |      | fa:16:3e:e2:9d:35 | {"subnet_id": "b00bed14-5b74-4402-a524-bebf2e10ff66", "ip_address": "10.0.0.4"}       |
 	| 8d9e0572-302c-4403-8f3f-577d73517941 |      | fa:16:3e:3c:b9:52 | {"subnet_id": "4938e49e-4a39-4758-9a7d-42870aa85971", "ip_address": "192.168.221.101"} |
 	| e2057c3b-b99b-45a0-ae2c-587cc38e211c |      | fa:16:3e:8e:17:8f | {"subnet_id": "cd9ccf2c-efc3-4222-b2a6-a1d0476e672e", "ip_address": "192.168.1.1"}     |
 	...
