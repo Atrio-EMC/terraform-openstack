@@ -5,7 +5,7 @@ variable "domain_name" { default = "default" }
 variable "secret_key" {}
 variable "auth_url" { default = "https://jupiter.gonzalonazareno.org:5000/v3"}
 variable "cacert_file" {default = "gonzalonazareno.crt" }
-
+variable "region" {default = "RegionOne"}
 
 # Nombre de la red externa de nuestra instalación de Openstack
 variable "ext-net" { default = "ext-net"}
@@ -41,6 +41,6 @@ variable "compute1_ip_int" {default = "192.168.221.102"}
 
 variable "device" {default = "/dev/vdb"}
 variable "size" {default = "10"}
-variable "region" {default = "RegionOne"}
+
 
 
