@@ -1,11 +1,5 @@
 # Configure the OpenStack Provider
 provider "openstack" {
-        user_name  = "${var.user_name}"
-        tenant_name = "${var.tenant_name}"
-        domain_name = "${var.domain_name}"
-        password  = "${var.secret_key}"
-        auth_url  = "${var.auth_url}"
-        cacert_file = "${var.cacert_file}"
 }
 
 resource "openstack_compute_keypair_v2" "terraform" {
@@ -47,17 +41,17 @@ resource "openstack_networking_subnet_v2" "subred-int" {
 
 resource "openstack_compute_instance_v2" "cliente" {
   name = "cliente"
-  region = "RegionOne"
+  region = "${var.region}"
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
-  
+  security_groups = ["default"]
 
   metadata {
     this = "that"
   }
   network {
-    name = "${var.red_ext_cliente}"
+    name = "${var.int-net}"
   }
 
   network {
@@ -88,11 +82,11 @@ resource "openstack_compute_floatingip_associate_v2" "myip" {
 
 resource "openstack_compute_instance_v2" "controller" {
   name = "controller"
-  region = "RegionOne"
+  region = "${var.region}"
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor_controller }"
   key_pair = "${var.key_ssh}"
-  
+  security_groups = ["default"]
 
   metadata {
     this = "that"
@@ -112,11 +106,11 @@ resource "openstack_compute_instance_v2" "controller" {
 
 resource "openstack_compute_instance_v2" "compute1" {
   name = "compute1"
-  region = "RegionOne"
+  region = "${var.region}"
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
-  
+  security_groups = ["default"]
 
   metadata {
     this = "that"

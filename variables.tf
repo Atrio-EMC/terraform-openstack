@@ -1,15 +1,7 @@
-#auth
-variable "user_name" { default = "demo3" }
-variable "tenant_name" { default = "demo3" }
-variable "domain_name" { default = "default" }
-variable "secret_key" {}
-variable "auth_url" { default = "https://jupiter.gonzalonazareno.org:5000/v3"}
-variable "cacert_file" {default = "gonzalonazareno.crt" }
-variable "region" {default = "RegionOne"}
 
-# Nombre de la red externa de nuestra instalación de Openstack
+# Nombre de la red externa e interna de nuestra instalación de Openstack
 variable "ext-net" { default = "ext-net"}
-variable "red_ext_cliente" { default = "demo-net"}
+variable "int-net" { default = "demo-net"}
 
 
 # Red externa
