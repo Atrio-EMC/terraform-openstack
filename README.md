@@ -77,7 +77,6 @@ Y desactivar el flag `port_security_enabled` en los puertos correspondientes a l
 	| e2057c3b-b99b-45a0-ae2c-587cc38e211c |      | fa:16:3e:8e:17:8f | {"subnet_id": "cd9ccf2c-efc3-4222-b2a6-a1d0476e672e", "ip_address": "192.168.1.1"}     |
 	...
 
-
 	neutron port-update  <Port_id> --port-security-enabled=False
 
 
