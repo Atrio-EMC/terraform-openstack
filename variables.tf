@@ -1,6 +1,6 @@
 #auth
-variable "user_name" { default = "demo" }
-variable "tenant_name" { default = "demo" }
+variable "user_name" { default = "demo3" }
+variable "tenant_name" { default = "demo3" }
 variable "domain_name" { default = "default" }
 variable "secret_key" {}
 variable "auth_url" { default = "https://jupiter.gonzalonazareno.org:5000/v3"}

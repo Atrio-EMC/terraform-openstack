@@ -51,7 +51,7 @@ resource "openstack_compute_instance_v2" "cliente" {
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
-  security_groups = []
+  
 
   metadata {
     this = "that"
@@ -92,7 +92,7 @@ resource "openstack_compute_instance_v2" "controller" {
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor_controller }"
   key_pair = "${var.key_ssh}"
-  security_groups = []
+  
 
   metadata {
     this = "that"
@@ -116,7 +116,7 @@ resource "openstack_compute_instance_v2" "compute1" {
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
-  security_groups = []
+  
 
   metadata {
     this = "that"
