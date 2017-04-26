@@ -31,10 +31,12 @@ Y creamos la infraestructura con la siguiente instrucción:
 Va a crear la siguiente infraestructura:
 
 * Una ip flotante para el `cliente`.
+* La clave ssh que hemos creado
 * Las redes y subredes correspondientes: `red-ext`, `red-int`.
 * 3 instancias: `cliente`, `controlador`,`compute1`
 * En cada instancia se ha añadido la clave ssh que hemos creado.
 * En el `cliente` se ha añadido la clave privada para poder acceder a las otras máquinas.
+* Se ha creado un volumen y se conectado a `controller`.
 
 Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`.
 

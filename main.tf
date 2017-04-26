@@ -11,6 +11,11 @@ resource "openstack_networking_floatingip_v2" "myip" {
   pool = "${var.ext-net}"
 }
 
+resource "openstack_blockstorage_volume_v2" "vol1" {
+  name = "volume_cinder"
+  size =  "${var.size}"
+}
+
 resource "openstack_networking_network_v2" "red-ext" {
   name = "red-ext"
   admin_state_up = "true"
@@ -41,7 +46,6 @@ resource "openstack_networking_subnet_v2" "subred-int" {
 
 resource "openstack_compute_instance_v2" "cliente" {
   name = "cliente"
-  region = "${var.region}"
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
@@ -82,7 +86,6 @@ resource "openstack_compute_floatingip_associate_v2" "myip" {
 
 resource "openstack_compute_instance_v2" "controller" {
   name = "controller"
-  region = "${var.region}"
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor_controller }"
   key_pair = "${var.key_ssh}"
@@ -106,7 +109,6 @@ resource "openstack_compute_instance_v2" "controller" {
 
 resource "openstack_compute_instance_v2" "compute1" {
   name = "compute1"
-  region = "${var.region}"
   image_name = "${var.imagen}"
   flavor_name = "${var.sabor}"
   key_pair = "${var.key_ssh}"
@@ -128,13 +130,9 @@ resource "openstack_compute_instance_v2" "compute1" {
 
 }
 
-resource "openstack_blockstorage_volume_v2" "vol1" {
-  name = "volume_cinder"
-  size =  "${var.size}"
-}
+
 
 resource "openstack_blockstorage_volume_attach_v2" "va_1" {
-  device = "${var.region}"
   volume_id = "${openstack_blockstorage_volume_v2.vol1.id}"
   device = "${var.device}"
   host_name = "controller"
