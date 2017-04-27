@@ -130,8 +130,6 @@ resource "openstack_compute_instance_v2" "compute1" {
 
 }
 
-
-
 resource "openstack_blockstorage_volume_attach_v2" "va_1" {
   volume_id = "${openstack_blockstorage_volume_v2.vol1.id}"
   host_name = "controller"
