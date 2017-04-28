@@ -24,6 +24,8 @@ Cargamos las credenciales de OpenStack:
 
 	$ source demo-openrc.sh
 
+Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`. Normanete solo es necesario cambiar la variable `int-net` donde se indica el nombre de la red interna de tu infraestructura Openstack donde se van a conectar las máquinas.
+
 Y creamos la infraestructura con la siguiente instrucción:
 
 	$ terraform apply
@@ -38,7 +40,6 @@ Va a crear la siguiente infraestructura:
 * En el `cliente` se ha añadido la clave privada para poder acceder a las otras máquinas.
 * Se ha creado un volumen y se conectado a `controller`.
 
-Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`.
 
 Una vez concluido nos muestra la ip flotante:
 
