@@ -24,7 +24,7 @@ Cargamos las credenciales de OpenStack:
 
 	$ source demo-openrc.sh
 
-Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`. Normanete solo es necesario cambiar la variable `int-net` donde se indica el nombre de la red interna de tu infraestructura Openstack donde se van a conectar las máquinas.
+Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`. Normalmente solo será necesario cambiar la variable `int-net` donde se indica el nombre de la red interna de tu infraestructura Openstack donde se van a conectar las máquinas.
 
 Y creamos la infraestructura con la siguiente instrucción:
 
