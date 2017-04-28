@@ -2,7 +2,7 @@
 
 Despliegue automático de Openstack usando terraform. La infraestructura que creamos con terraform es la siguiente:
 
-![schema](https://github.com/iesgn/terraform-openstack/raw/master/img/tos.png)
+![schema](https://github.com/iesgn/terraform-openstack/raw/escenario2/img/tos.png)
 
 * La infraestructura de Openstack consta de un controlador y un nodo de computo que se van a conectar en la red interna de nuestro proyecto y en una red interna que hemos creado (`red-int`).
 * La máquina `controller` se le asigna una ip flotante para realizar la instalación de Openstack y poder acceder a los recursos creados.
