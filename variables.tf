@@ -4,13 +4,8 @@ variable "ext-net" { default = "ext-net"}
 variable "int-net" { default = "demo-net"}
 
 
-# Red externa
-variable "ip_subred-ext" {default = "192.168.1.0/24"}
-variable "dns_subred-ext" { type="list" default=["192.168.102.2"]}
-variable "gateway-ext" {default = "192.168.1.1"}
-
 #Red interna
-variable "ip_subred-int" {default = "192.168.221.0/24"}
+variable "ip_subred-int" {default = "192.168.0.0/24"}
 
 
 #Configuración de las máquinas
@@ -23,11 +18,11 @@ variable "ssh_key_file" {default = "~/.ssh/id_rsa.terraform"}
 
 #Configuración de las ip
 
-variable "controller_ip_ext" {default = "192.168.1.101"}
-variable "controller_ip_int" {default = "192.168.221.101"}
+variable "controller_ip_ext" {default = "10.0.0.10"}
+variable "controller_ip_int" {default = "192.168.0.10"}
 
-variable "compute1_ip_ext" {default = "192.168.1.102"}
-variable "compute1_ip_int" {default = "192.168.221.102"}
+variable "compute1_ip_ext" {default = "10.0.0.11"}
+variable "compute1_ip_int" {default = "192.168.0.11"}
 
 #Configuración del volumen
 

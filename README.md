@@ -4,8 +4,8 @@ Despliegue automático de Openstack usando terraform. La infraestructura que cre
 
 ![schema](https://github.com/iesgn/terraform-openstack/raw/master/img/tos.png)
 
-* La infraestructura de Openstack consta de un controlador y un nodo de computo que se van a crear en dos redes internas (`red-ext` y `red-int`).
-* Desde la máquina `cliente` vamos a controlar nuestra instalación de openstack: hay que configurarla como router, para que las máquinas de openstack tengan conexión a internet, desde ella vamos a ejecutar las recetas ansible de instalación y vamos acceder a las instancias creadas.
+* La infraestructura de Openstack consta de un controlador y un nodo de computo que se van a conectar en la red interna de nuestro proyecto y en una red interna que hemos creado (`red-int`).
+* La máquina `controller` se le asigna una ip flotante para realizar la instalación de Openstack y poder acceder a los recursos creados.
 
 ## Creación de la infraestrucutra con terraform
 
@@ -32,12 +32,12 @@ Y creamos la infraestructura con la siguiente instrucción:
 
 Va a crear la siguiente infraestructura:
 
-* Una ip flotante para el `cliente`.
+* Una ip flotante para el `controller`.
 * La clave ssh que hemos creado
-* Las redes y subredes correspondientes: `red-ext`, `red-int`.
-* 3 instancias: `cliente`, `controlador`,`compute1`
+* Las red `red-int`.
+* 2 instancias: `controlador`,`compute1`
 * En cada instancia se ha añadido la clave ssh que hemos creado.
-* En el `cliente` se ha añadido la clave privada para poder acceder a las otras máquinas.
+* En el `cpntroller` se ha añadido la clave privada para poder acceder a las otras máquinas.
 * Se ha creado un volumen y se conectado a `controller`.
 
 

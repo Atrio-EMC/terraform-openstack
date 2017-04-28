@@ -16,20 +16,6 @@ resource "openstack_blockstorage_volume_v2" "vol1" {
   size =  "${var.size}"
 }
 
-resource "openstack_networking_network_v2" "red-ext" {
-  name = "red-ext"
-  admin_state_up = "true"
-
-}
-
-resource "openstack_networking_subnet_v2" "subred-ext" {
-  name = "subred-ext"
-  network_id = "${openstack_networking_network_v2.red-ext.id}"
-  cidr = "${var.ip_subred-ext}"
-  dns_nameservers = "${var.dns_subred-ext}"
-  ip_version = 4
-
-}
 
 resource "openstack_networking_network_v2" "red-int" {
   name = "red-int"
@@ -44,33 +30,11 @@ resource "openstack_networking_subnet_v2" "subred-int" {
 
 }
 
-resource "openstack_compute_instance_v2" "cliente" {
-  name = "cliente"
-  image_name = "${var.imagen}"
-  flavor_name = "${var.sabor}"
-  key_pair = "${var.key_ssh}"
-  security_groups = ["default"]
-
-  metadata {
-    this = "that"
-  }
-  network {
-    name = "${var.int-net}"
-  }
-
-  network {
-    uuid = "${openstack_networking_network_v2.red-ext.id}"
-    fixed_ip_v4 = "${var.gateway-ext}"
-  }
-
-
-
-}
 
 resource "openstack_compute_floatingip_associate_v2" "myip" {
   floating_ip = "${openstack_networking_floatingip_v2.myip.address}"
-  instance_id = "${openstack_compute_instance_v2.cliente.id}"
-  fixed_ip    = "${openstack_compute_instance_v2.cliente.network.0.fixed_ip_v4}"
+  instance_id = "${openstack_compute_instance_v2.controller.id}"
+  fixed_ip    = "${openstack_compute_instance_v2.controller.network.0.fixed_ip_v4}"
 
   provisioner "file" {
     source      = "${var.ssh_key_file}"
@@ -95,11 +59,13 @@ resource "openstack_compute_instance_v2" "controller" {
     this = "that"
   }
 
+
   network {
-    uuid = "${openstack_networking_network_v2.red-ext.id}"
-    fixed_ip_v4 = "${var.controller_ip_ext}"
+    name = "${var.int-net}"
+    fixed_ip_v4="${var.controller_ip_ext}"
   }
 
+  
   network {
     uuid = "${openstack_networking_network_v2.red-int.id}"
     fixed_ip_v4 = "${var.controller_ip_int}"
@@ -119,8 +85,8 @@ resource "openstack_compute_instance_v2" "compute1" {
   }
 
   network {
-    uuid = "${openstack_networking_network_v2.red-ext.id}"
-    fixed_ip_v4 = "${var.compute1_ip_ext}"
+    name = "${var.int-net}"
+    fixed_ip_v4="${var.compute1_ip_ext}"
   }
 
   network {
