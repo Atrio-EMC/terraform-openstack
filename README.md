@@ -4,8 +4,11 @@ Despliegue automático de Openstack usando terraform. La infraestructura que cre
 
 ![schema](https://github.com/iesgn/terraform-openstack/raw/escenario2/img/tos.png)
 
-* La infraestructura de Openstack consta de un controlador y un nodo de computo que se van a conectar en la red interna de nuestro proyecto y en una red interna que hemos creado (`red-int`).
-* La máquina `controller` se le asigna una ip flotante para realizar la instalación de Openstack y poder acceder a los recursos creados.
+* La infraestructura de Openstack consta de un controlador y un nodo
+  de cómputo que se van a conectar en la red interna de nuestro
+  proyecto y en una red interna que hemos creado (`red-int`).
+* La máquina `controller` se le asigna una ip flotante para realizar
+  la instalación de Openstack y poder acceder a los recursos creados.
 
 ## Creación de la infraestrucutra con terraform
 
@@ -16,15 +19,23 @@ Clonamos nuestro repositorio:
 	$ git clone git@github.com:iesgn/terraform-openstack.git
 	$ cd terraform-openstack
 
-A continuación creamos las claves ssh que vamos a utilizar en la creación de las máquinas del escenario:
+A continuación creamos las claves ssh que vamos a utilizar en la
+creación de las máquinas del escenario:
 
 	$ ssh-keygen -f ~/.ssh/id_rsa.terraform -N ""
 
-Cargamos las credenciales de OpenStack:
+Cargamos las credenciales de OpenStack (en este caso están en el
+fichero demo-openrc.sh)::
 
 	$ source demo-openrc.sh
 
-Puedes modificar los distintos parámetros de configuración en el fichero `variables.tf`. Normalmente solo será necesario cambiar la variable `int-net` donde se indica el nombre de la red interna de tu infraestructura Openstack donde se van a conectar las máquinas.
+Puedes modificar los distintos parámetros de configuración en el
+fichero `variables.tf`. Normalmente solo será necesario cambiar la
+variable `int-net` donde se indica el nombre de la red interna de tu
+infraestructura Openstack donde se van a conectar las máquinas, las
+IPs correspondientes a esta red ("controller_ip_ext" y
+"compute1_ip_ext"), los sabores a utilizar (con un mínimo de 4 GiB de
+RAM) y el nombre de la imagen de Ubuntu Xenial disponible.
 
 Y creamos la infraestructura con la siguiente instrucción:
 
@@ -35,11 +46,11 @@ Va a crear la siguiente infraestructura:
 * Una ip flotante para el `controller`.
 * La clave ssh que hemos creado
 * Las red `red-int`.
-* 2 instancias: `controlador`,`compute1`
+* 2 instancias: `controller`,`compute1`
 * En cada instancia se ha añadido la clave ssh que hemos creado.
-* En el `cpntroller` se ha añadido la clave privada para poder acceder a las otras máquinas.
+* En el `controller` se ha añadido la clave privada para poder acceder
+  a las otras máquinas.
 * Se ha creado un volumen y se conectado a `controller`.
-
 
 Una vez concluido nos muestra la ip flotante:
 
@@ -52,7 +63,9 @@ Si queremos eliminar la infraestructura creada:
 
 ## Configuración de la red
 
-Para permitir la comunicación entre las máquinas de nuestro escenario, hay que desactivar el antispoofing gestionando la extensión `port-security` en todas las redes de nuestra infraestructura.
+Para permitir la comunicación entre las máquinas de nuestro escenario,
+hay que desactivar el antispoofing gestionando la extensión
+`port-security` en todas las redes de nuestra infraestructura.
 
 ### Instalar nova-cli y neutron-cli
 
@@ -64,14 +77,18 @@ Voy a crear un entorno virtual, en mi puesto de trabajo, para instalar los clien
 	$ source os/bin/activate
 	(os)$ pip install requests python-novaclient python-neutronclient
 
-Siguiendo las siguientes [instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver) (recordamos que debe estar habiliatado la extensión `port security`), hay que quitar el grupo de seguridad de las máquinas:
+Siguiendo las siguientes
+[instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver)
+(recordamos que debe estar habiliatado la extensión `port security`),
+hay que quitar el grupo de seguridad de las máquinas:
 
 	nova remove-secgroup cliente default
 	nova remove-secgroup controller default
 	nova remove-secgroup compute1 default
 
 
-Y desactivar el flag `port_security_enabled` en los puertos correspondientes a las interfaces de ´cliente´:
+Y desactivar el flag `port_security_enabled` en los puertos
+correspondientes a las interfaces de ´cliente´: 
 
 	neutron port-list
 
@@ -89,7 +106,8 @@ Y desactivar el flag `port_security_enabled` en los puertos correspondientes a l
 
 ## Configuración del `cliente` 
 
-Desde nuestro puesto de trabajo, necesitamos instalar [fabric](http://www.fabfile.org/):
+Desde nuestro puesto de trabajo, necesitamos instalar
+[fabric](http://www.fabfile.org/):
 
 	# apt-get install fabric
 
