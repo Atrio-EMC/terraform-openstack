@@ -43,7 +43,8 @@ Y creamos la infraestructura con la siguiente instrucción:
 
 Va a crear la siguiente infraestructura:
 
-* Una ip flotante para el `controller`.
+* Dos IPs flotantes, una para el controlador y otra para el nodo de
+  computación
 * La clave ssh que hemos creado
 * Las red `red-int`.
 * 2 instancias: `controller`,`compute1`
@@ -52,10 +53,12 @@ Va a crear la siguiente infraestructura:
   a las otras máquinas.
 * Se ha creado un volumen y se conectado a `controller`.
 
-Una vez concluido nos muestra la ip flotante:
+Una vez concluido nos muestra las direcciones IP flotantes:
 
-	Outputs:
-	address = X.X.X.X
+    Outputs:
+
+    Compute1 address = X.X.X.X
+    Controller address = Y.Y.Y.Y
 
 Si queremos eliminar la infraestructura creada:
 
