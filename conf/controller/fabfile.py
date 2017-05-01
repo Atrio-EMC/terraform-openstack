@@ -5,18 +5,21 @@ env.user   = "ubuntu"
    
 
 def main():
+    # Configurar el /etc/hosts
+    put('../hosts','/etc/hosts',use_sudo=True)
+
+    # Actualizar el sistema
     sudo("apt-get update")
     sudo("apt-get -y upgrade")
 
-
-    # Compruebo si ens4 está configurada
+    # Comprobar si ens4 está configurada
     try:
         sudo("cat '/etc/network/interfaces.d/50-cloud-init.cfg' |grep ens4")
     except:
         sudo('echo "\nauto ens4\niface ens4 inet dhcp">>/etc/network/interfaces.d/50-cloud-init.cfg')
         sudo("ifup ens4")
 	
-    # Configuro el router
+    # Configurar el router
     try:
         sudo("cat '/etc/network/interfaces.d/50-cloud-init.cfg' |grep iptables")
     except:
@@ -25,12 +28,9 @@ def main():
 	sudo('sed -i -e s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g /etc/sysctl.conf')
 	sudo('sysctl -p')
 
-    # Configura permisos de la clave privada
-    
-    run("chmod 400 ~/.ssh/id_rsa")
+    # Copiar la clave ssh y configurar permisos:
+    put('~/.ssh/id_rsa.terraform','~/.ssh/id_rsa', mode=0600)
 
-    # Instalo los paquetes necesarios
-    sudo("apt-get -y install ansible git aptitude language-pack-es")
+    # Instalar aptitude
+    sudo("apt-get -y install aptitude")
 	
-    # Configurar el /etc/hosts
-    put('hosts','/etc/hosts',use_sudo=True)
