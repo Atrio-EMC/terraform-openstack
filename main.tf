@@ -11,6 +11,10 @@ resource "openstack_networking_floatingip_v2" "myip" {
   pool = "${var.ext-net}"
 }
 
+resource "openstack_networking_floatingip_v2" "myip2" {
+  pool = "${var.ext-net}"
+}
+
 resource "openstack_blockstorage_volume_v2" "vol1" {
   name = "volume_cinder"
   size =  "${var.size}"
@@ -31,21 +35,28 @@ resource "openstack_networking_subnet_v2" "subred-int" {
 }
 
 
+
 resource "openstack_compute_floatingip_associate_v2" "myip" {
   floating_ip = "${openstack_networking_floatingip_v2.myip.address}"
   instance_id = "${openstack_compute_instance_v2.controller.id}"
   fixed_ip    = "${openstack_compute_instance_v2.controller.network.0.fixed_ip_v4}"
 
-  provisioner "file" {
-    source      = "${var.ssh_key_file}"
-    destination = "~/.ssh/id_rsa"
-    connection {
-        type = "ssh"
-        user = "ubuntu"
-        private_key = "${file("${var.ssh_key_file}")}"
-        host = "${openstack_networking_floatingip_v2.myip.address}"
-        }
-  }
+  # provisioner "file" {
+  #   source      = "${var.ssh_key_file}"
+  #   destination = "~/.ssh/id_rsa"
+  #   connection {
+  #       type = "ssh"
+  #       user = "ubuntu"
+  #       private_key = "${file("${var.ssh_key_file}")}"
+  #       host = "${openstack_networking_floatingip_v2.myip.address}"
+  #       }
+  # }
+}
+
+resource "openstack_compute_floatingip_associate_v2" "myip2" {
+  floating_ip = "${openstack_networking_floatingip_v2.myip2.address}"
+  instance_id = "${openstack_compute_instance_v2.compute1.id}"
+  fixed_ip    = "${openstack_compute_instance_v2.compute1.network.0.fixed_ip_v4}"
 }
 
 resource "openstack_compute_instance_v2" "controller" {
@@ -96,7 +107,7 @@ resource "openstack_compute_instance_v2" "compute1" {
 
 }
 
-resource "openstack_blockstorage_volume_attach_v2" "va_1" {
-  volume_id = "${openstack_blockstorage_volume_v2.vol1.id}"
-  host_name = "controller"
-}
+# resource "openstack_blockstorage_volume_attach_v2" "va_1" {
+#   volume_id = "${openstack_blockstorage_volume_v2.vol1.id}"
+#   host_name = "controller"
+# }
