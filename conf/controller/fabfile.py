@@ -32,5 +32,5 @@ def main():
     put('~/.ssh/id_rsa.terraform','~/.ssh/id_rsa', mode=0600)
 
     # Instalar aptitude
-    sudo("apt-get -y install aptitude")
+    sudo("apt-get -y install aptitude ansible language-pack-es")
 	

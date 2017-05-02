@@ -126,7 +126,7 @@ El script realiza las siguientes tareas:
 * Levanta la segunda interfaz
 * Configura el enrutamiento 
 * Configura permisos de la clave privada
-* Instala los paquetes necesarios: git, ansible, aptitude, fabric
+* Instala los paquetes necesarios: git, ansible
 * Configura el /etc/hosts
 
 ## Configuración del nodo de computación

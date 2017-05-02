@@ -19,5 +19,5 @@ def main():
         sudo("ifup ens4")
 
     # Instalar aptitude
-    sudo("apt-get -y install aptitude")
+    sudo("apt-get -y install aptitude language-pack-es python python-shade")
 
