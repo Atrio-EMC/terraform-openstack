@@ -102,7 +102,7 @@ correspondientes a las interfaces de 'compute' y 'controller':
 	neutron port-update  <Port_id> --port-security-enabled=False
 
 
-## Configuración del nodo controlador
+## Configuración de los nodos
 
 Vamos a realizar esta configuración con la herramienta "fabric", por lo que en nuestro puesto de trabajo, necesitamos instalar [fabric](http://www.fabfile.org/):
 
@@ -115,39 +115,22 @@ O de forma alternativa en un entorno virtual:
 	(fabric)$ pip install appdirs pyparsing fabric  
 
 A continuación ejecutamos la configuración de fabric (donde X.X.X.X es
-la IP flotante asociada al nodo controlador):
+la IP flotante asociada al nodo controlador y Y.Y.Y.Y la IP flotante asociada al nodo de computación):
 
-	$ cd conf/controller
-	$ fab -H X.X.X.X main
+	$ cd conf
+	$ fab -H X.X.X.X , Y.Y.Y.Y main
 
 El script realiza las siguientes tareas:
 
 * Actualiza el sistema
 * Levanta la segunda interfaz
-* Configura el enrutamiento 
 * Configura permisos de la clave privada
-* Instala los paquetes necesarios: git, ansible
-* Configura el /etc/hosts
-
-## Configuración del nodo de computación
-
-De forma similar, realizamos la configuración del nodo de computación
-desde nuestro equipo (donde X.X.X.X es la IP flotante asociada al nodo
-de computación): 
-
-	$ cd conf/nodos
-	$ fab -H X.X.X.X main
-
-El script realiza las siguientes tareas:
-
-* Actualiza el sistema
-* Levanta la segunda interfaz
-* Instala los paquetes necesarios: python, aptitude
+* Instala los paquetes necesarios
 * Configura el /etc/hosts
 
 ## Ejecución de la receta de ansible
 
-Accedemos al nodo controlador y Clonamos el repositorio de instalación
+Desde nuestro equipod e trabajo, clonamos el repositorio de instalación
 de OpenStack sobre Ubuntu (en este caso la rama ocata):
 
 	$ git clone -b ocata https://github.com/iesgn/openstack-ubuntu-ansible.git
@@ -157,35 +140,3 @@ Y lo ejecutamos:
 	$ cd openstack-ubuntu-ansible
 	$ ansible-playbook site.yml --sudo
 
-<!-- ## Acceder a horizon a través de `cliente` -->
-
-<!-- Vamos a instalar un proxy inverso en `cliente` con apache2, para ello: -->
-
-<!-- 	$ apt-get install apache2 -->
-
-<!-- 	$ a2enmod proxy -->
-<!-- 	$ a2enmod proxy_wstunnel -->
-<!-- 	$ a2enmod proxy_http -->
-
-<!-- Y el fichero de configuración `/etc/apache2/sites-available/000-default`: -->
-
-<!-- 	<VirtualHost *:80> -->
-<!--     #ServerName publicdomin.name -->
-<!--     ProxyPreserveHost On -->
-<!--     ProxyPass / http://192.168.1.101/ -->
-<!--     ProxyPassReverse / http://192.168.1.101/ -->
-
-<!-- 	</VirtualHost> -->
-
-<!-- 	<VirtualHost *:6080> -->
-<!--     #ServerName publicdomain.name -->
-<!--     ProxyPreserveHost On -->
-<!--     ProxyRequests On -->
-<!--     ProxyPass /websockify ws://192.168.1.101:6080/websockify  retry=3 -->
-<!--     ProxyPass / http://192.168.1.101:6080/ retry=1 -->
-<!--     ProxyPassReverse / http://192.168.1.101:6080/ retry=1 -->
-<!-- 	</VirtualHost> -->
-
-<!-- 	$ service apache2 restart -->
-
-<!-- Para más información:[https://ask.openstack.org/en/question/7102/connecting-vnc-from-wan-behind-a-apache-246-proxy/](https://ask.openstack.org/en/question/7102/connecting-vnc-from-wan-behind-a-apache-246-proxy/). -->
