@@ -16,7 +16,7 @@ Despliegue automático de Openstack usando terraform. La infraestructura que cre
 
 Clonamos nuestro repositorio:
 
-	$ git clone git@github.com:iesgn/terraform-openstack.git
+	$ git clone -b escenario2 git@github.com:iesgn/terraform-openstack.git
 	$ cd terraform-openstack
 
 A continuación creamos las claves ssh que vamos a utilizar en la
