@@ -6,7 +6,7 @@ env.user   = "ubuntu"
 
 def main():
     # Configurar el /etc/hosts
-    put('../hosts','/etc/hosts',use_sudo=True)
+    put('./hosts','/etc/hosts',use_sudo=True)
 
     # Actualizar el sistema
     sudo("apt-get update")
