@@ -31,7 +31,7 @@ resource "openstack_networking_subnet_v2" "subred-int" {
   network_id = "${openstack_networking_network_v2.red-int.id}"
   cidr = "${var.ip_subred-int}"
   ip_version = 4
-
+  no_gateway = true
 }
 
 
