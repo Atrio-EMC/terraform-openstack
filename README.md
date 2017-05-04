@@ -124,15 +124,14 @@ A continuación ejecutamos la configuración de fabric (donde X.X.X.X es
 la IP flotante asociada al nodo controlador y Y.Y.Y.Y la IP flotante asociada al nodo de computación):
 
 	$ cd conf
-	$ fab -H X.X.X.X , Y.Y.Y.Y main
+	$ fab -H X.X.X.X,Y.Y.Y.Y main
 
 El script realiza las siguientes tareas:
 
+* Configura el /etc/hosts
 * Actualiza el sistema
-* Levanta la segunda interfaz
 * Configura permisos de la clave privada
 * Instala los paquetes necesarios
-* Configura el /etc/hosts
 
 ## Ejecución de la receta de ansible
 
