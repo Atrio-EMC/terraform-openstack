@@ -67,7 +67,8 @@ Si queremos eliminar la infraestructura creada:
 ## Configuración de la red
 
 Para permitir la comunicación entre las máquinas de nuestro escenario,
-hay que desactivar el antispoofing gestionando la extensión
+hay que desactivar la configuración de los cortafuegos por interfaz
+que automáticamente añade OpenStack, gestionando la extensión
 `port-security` en todas las redes de nuestra infraestructura.
 
 ### Instalar nova-cli y neutron-cli
@@ -80,14 +81,20 @@ Voy a crear un entorno virtual, en mi puesto de trabajo, para instalar los clien
 	$ source os/bin/activate
 	(os)$ pip install requests python-novaclient python-neutronclient
 
-Siguiendo las siguientes
-[instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver)
+Ejecutamos el siguiente script:
+
+    $ source deshabilitar_grupos_seguridad.sh
+	
+Que siguiendo las siguientes
+[instrucciones](https://wiki.openstack.org/wiki/Neutron/ML2PortSecurityExtensionDriver) 
 (recordamos que debe estar habiliatado la extensión `port security`),
-hay que quitar el grupo de seguridad de las máquinas:
+se encarga de quitar los grupos de seguridad y deshabilitar la
+política antispoofing de OpenStack en cada interfaz de red.
+
+También podríamos hacerlo manualmente mediante los siguientes pasos:
 
 	nova remove-secgroup controller default
 	nova remove-secgroup compute1 default
-
 
 Y desactivar el flag `port_security_enabled` en los puertos
 correspondientes a las interfaces de 'compute' y 'controller':
@@ -100,7 +107,6 @@ correspondientes a las interfaces de 'compute' y 'controller':
 	| b5ed6b30-564c-4682-a17e-6caed1797a8a |      | fa:16:3e:fd:a5:4f | {"subnet_id": "b0242456-3da3-4f9a-9f32-3a657ec22ed7", "ip_address": "192.168.0.11"}                          |
 	...
 	neutron port-update  <Port_id> --port-security-enabled=False
-
 
 ## Configuración de los nodos
 
