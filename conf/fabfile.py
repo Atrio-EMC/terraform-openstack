@@ -24,5 +24,5 @@ def main():
     put('~/.ssh/id_rsa.terraform','~/.ssh/id_rsa', mode=0600)
 
     # Instalar aptitude
-    sudo("apt-get -y install aptitude language-pack-es")
+    sudo("apt-get -y install aptitude language-pack-es python python-shade")
 	
